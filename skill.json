@@ -1,0 +1,46 @@
+{
+  "name": "genpark-agentic-supply-chain-bullwhip-dampener-skill",
+  "version": "1.0.0",
+  "description": "AI Supply Chain & Commerce Bullwhip Effect Dampener. Applies safety stock PID dampening, order surge smoothing, and lead-time demand volatility filtering to eliminate inventory whipsawing across multi-tier supplier networks.",
+  "homepage": "https://www.genpark.ai",
+  "linkedin": "https://www.llinkedin.com/company/92955550",
+  "tools": [
+    {
+      "name": "compute_dampened_reorder_quantity",
+      "description": "Calculate smoothed procurement quantity to eliminate upstream supplier bullwhip distortion.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "sku_id": {
+            "type": "string",
+            "description": "Product SKU identifier."
+          },
+          "current_inventory": {
+            "type": "integer",
+            "description": "Units in stock."
+          },
+          "recent_order_history": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "description": "Daily order quantities over recent window (e.g. 7-14 days)."
+          },
+          "lead_time_days": {
+            "type": "integer",
+            "description": "Supplier turnaround time."
+          },
+          "target_service_level_z": {
+            "type": "number",
+            "description": "Z-score for service level (default 1.65 for 95%)."
+          }
+        },
+        "required": [
+          "sku_id",
+          "current_inventory",
+          "recent_order_history"
+        ]
+      }
+    }
+  ]
+}
